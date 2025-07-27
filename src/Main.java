@@ -20,14 +20,13 @@ public class Main {
             menu.displayMenu();
             System.out.print("Choose an option 1-6: #");
             String input = scan.next();
-            if (input.equals("6")) {
-                break;
+            boolean valid = false;
+            for (int i = 1; i < 7; i++) {
+                if (input.equals(String.valueOf(i))) {
+                    valid = true;
+                }
             }
-            if (!(input.equals("1") ||
-                  input.equals("2") ||
-                  input.equals("3") ||
-                  input.equals("4") ||
-                  input.equals("5"))) {
+            if (!valid) {
                 System.out.println("Invalid input.");
                 continue;
             }

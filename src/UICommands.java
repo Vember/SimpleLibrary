@@ -69,6 +69,7 @@ public class UICommands {
             System.out.println("Invalid input.");
             return;
         }
+        System.out.println(visitor.getFirstName() + " has returned " + visitor.getBooksCheckedOut().get(input - 1).getTitle() + ".");
         library.returnBookFromVisitor(visitor, visitor.getBooksCheckedOut().get(input - 1));
     }
 
