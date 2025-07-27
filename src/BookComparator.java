@@ -3,9 +3,9 @@ import java.util.Comparator;
 public class BookComparator implements Comparator<Book> {
 
     @Override
-    public int compare(Book o1, Book o2) {
-        String name1 = o1.getTitle();
-        String name2 = o2.getTitle();
+    public int compare(Book one, Book two) {
+        String name1 = one.getTitle();
+        String name2 = two.getTitle();
         if (name1.toLowerCase().startsWith("the ")) {
             name1 = name1.substring(4);
         }
