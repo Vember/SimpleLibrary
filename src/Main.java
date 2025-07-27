@@ -21,7 +21,7 @@ public class Main {
             System.out.print("Choose an option 1-6: #");
             String input = scan.next();
             boolean valid = false;
-            for (int i = 1; i < 7; i++) {
+            for (int i = 1; i < menu.getHashMap().size() + 1; i++) {
                 if (input.equals(String.valueOf(i))) {
                     valid = true;
                 }

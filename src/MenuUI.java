@@ -9,6 +9,10 @@ public class MenuUI {
         this.menuItems = new LinkedHashMap<>();
     }
 
+    public LinkedHashMap<String, MenuItem> getHashMap() {
+        return this.menuItems;
+    }
+
     public void addMenuItem(String key, String name, Runnable action) {
         menuItems.put(key, new MenuItem(name, action));
     }
