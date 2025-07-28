@@ -8,6 +8,8 @@ public class Library {
     private String name;
     private ArrayList<Book> booksIn;
     private ArrayList<Book> booksOut;
+    private ArrayList<Visitor> visitors;
+    public Visitor currentVisitor;
 
     public Library(String name) throws FileNotFoundException {
 
@@ -16,12 +18,35 @@ public class Library {
         this.name = name;
         this.booksIn = new ArrayList<>();
         this.booksOut = new ArrayList<>();
+        this.visitors = new ArrayList<>();
 
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             String[] parts = line.split(">");
             booksIn.add(new Book(parts[0], parts[1], parts[2], Integer.valueOf(parts[3])));
         }
+    }
+
+    public ArrayList<Visitor> getVisitors() {
+        return this.visitors;
+    }
+
+    public void addVisitor(Visitor visitor) {
+        this.visitors.add(visitor);
+    }
+
+    public Visitor getCurrentVisitor() {
+        return this.currentVisitor;
+    }
+
+    public void listVisitors() {
+        for (int i = 0; i < this.visitors.size(); i++) {
+            System.out.println((i + 1) + ": " + this.visitors.get(i).getLastName() + ", " + this.visitors.get(i).getFirstName());
+        }
+    }
+
+    public void setCurrentVisitor(Visitor visitor) {
+        this.currentVisitor = visitor;
     }
 
     public String getName() {

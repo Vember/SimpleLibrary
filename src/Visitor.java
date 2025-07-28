@@ -41,12 +41,7 @@ public class Visitor {
     }
 
     public boolean hasBookCheckedOut(Book book) {
-        for (int i = 0; i < booksCheckedOut.size(); i++) {
-            if (this.booksCheckedOut.get(i) == book) {
-                return true;
-            }
-        }
-        return false;
+        return this.booksCheckedOut.contains(book);
     }
 
     public void checkOutBook(Book book) {
@@ -56,11 +51,8 @@ public class Visitor {
     }
 
     public void returnBook(Book book) {
-        for (int i = 0; i < this.booksCheckedOut.size(); i++) {
-            if (this.booksCheckedOut.get(i) == book) {
-                booksCheckedOut.remove(book);
-                return;
-            }
+        if (this.booksCheckedOut.contains(book)) {
+            booksCheckedOut.remove(book);
         }
     }
 

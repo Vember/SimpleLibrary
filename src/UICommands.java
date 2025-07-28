@@ -11,7 +11,29 @@ public class UICommands {
         String[] parts = input.split(", ");
         Visitor visitor = new Visitor(parts[1], parts[0]);
         System.out.println("Welcome to " + library.getName() + ", " + visitor.getFirstName() + "!");
+        library.addVisitor(visitor);
         return visitor;
+
+    }
+
+    public static void declareCurrentVisitor(Library library) {
+
+        Scanner scan = new Scanner(System.in);
+        library.listVisitors();
+        System.out.println();
+        System.out.print("Which visitor to declare?: #");
+        int input = 0;
+        try {
+            input = Integer.parseInt(scan.nextLine());
+        } catch(NumberFormatException e) {
+            System.out.println("Invalid input.");
+            return;
+        }
+        if (input > (library.getVisitors()).size() || input < 1) {
+            System.out.println("Invalid input.");
+            return;
+        }
+        library.setCurrentVisitor(library.getVisitors().get(input - 1));
 
     }
 

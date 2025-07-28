@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LibraryBetter.iml" filepath="$PROJECT_DIR$/LibraryBetter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SimpleLibrary.iml" filepath="$PROJECT_DIR$/SimpleLibrary.iml" />
     </modules>
   </component>
 </project>
