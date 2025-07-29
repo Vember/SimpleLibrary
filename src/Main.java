@@ -21,7 +21,7 @@ public class Main {
 
         while (true) {
             menu.displayMenu();
-            System.out.print("Choose an option 1-8: #");
+            System.out.print("Choose an option 1-" + menu.getHashMap().size() + ": #");
             String input = scan.next();
             boolean valid = false;
             for (int i = 1; i < menu.getHashMap().size() + 1; i++) {

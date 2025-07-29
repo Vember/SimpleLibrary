@@ -48,7 +48,7 @@ public class UICommands {
     public static void checkOutBook(Library library, Visitor visitor) {
 
         Scanner scan = new Scanner(System.in);
-        library.listBooks();
+        listBooksIn(library);
         System.out.println();
         System.out.print("Which book would you like to check out?: #");
         int input = 0;
@@ -62,10 +62,12 @@ public class UICommands {
             System.out.println("Invalid input.");
             return;
         }
-        if (!visitor.hasMaxBooks()) {
-            System.out.println(visitor.getFirstName() + " has checked out " + library.getBooksIn().get(input - 1).getTitle() + ".");
+        try {
+            library.checkBookToVisitor(visitor, library.getBooksIn().get(input - 1));
+            System.out.println(visitor.getFirstName() + " has checked out " + visitor.getBooksCheckedOut().getLast().getTitle());
+        } catch (CheckOutBookLimitException e) {
+            System.out.println(e.getMessage());
         }
-        library.checkBookToVisitor(visitor, library.getBooksIn().get(input - 1));
 
     }
 
@@ -77,7 +79,7 @@ public class UICommands {
             return;
         }
         System.out.println();
-        visitor.listBooksCheckedOut();
+        listVisitorBooksCheckedOut(visitor);
         System.out.println();
         System.out.print("Which book would you like to return?: #");
         int input = 0;
@@ -91,20 +93,53 @@ public class UICommands {
             System.out.println("Invalid input.");
             return;
         }
-        System.out.println(visitor.getFirstName() + " has returned " + visitor.getBooksCheckedOut().get(input - 1).getTitle() + ".");
-        library.returnBookFromVisitor(visitor, visitor.getBooksCheckedOut().get(input - 1));
-    }
-
-    public static void listBooksIn(Library library) {
-        library.listBooks();
+        Book returned = visitor.getBooksCheckedOut().get(input - 1);
+        try {
+            library.returnBookFromVisitor(visitor, visitor.getBooksCheckedOut().get(input - 1));
+            System.out.println(visitor.getFirstName() + " has returned " + returned.getTitle() + ".");
+        } catch (VisitorDoesNotPossessException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void listBooksOut(Library library) {
-        library.listBooksOut();
+        if (library.getBooksOut().isEmpty()) {
+            System.out.println("There are no books currently checked out.");
+            return;
+        }
+        System.out.println("Books currently checked out of " + library.getName() + ":");
+        System.out.println();
+        library.getBooksOut().sort(new BookComparator());
+        for (int i = 0; i < library.getBooksOut().size(); i++) {
+            System.out.println(i + 1 + ": " + library.getBooksOut().get(i));
+        }
     }
 
     public static void listVisitorsBooks(Visitor visitor) {
-        visitor.listBooksCheckedOut();
+        listVisitorBooksCheckedOut(visitor);
+    }
+
+    public static void listBooksIn(Library library) {
+        System.out.println("Books currently in " + library.getName() + ":");
+        library.getBooksIn().sort(new BookComparator());
+        System.out.println();
+        for (int i = 0; i < library.getBooksIn().size(); i++) {
+            System.out.println(i + 1 + ": " + library.getBooksIn().get(i));
+        }
+    }
+
+    public static void listVisitorBooksCheckedOut(Visitor visitor) {
+
+        if (visitor.hasZeroBooks()) {
+            System.out.println(visitor.getFirstName() + " has no books checked out.");
+            return;
+        }
+        visitor.getBooksCheckedOut().sort(new BookComparator());
+        System.out.println(visitor.getFirstName() + "'s checked out books:");
+        System.out.println();
+        for (int i = 0; i < visitor.getBooksCheckedOut().size(); i++) {
+            System.out.println(i + 1 + ": " + visitor.getBooksCheckedOut().get(i));
+        }
     }
 
 }

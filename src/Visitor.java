@@ -14,20 +14,6 @@ public class Visitor {
 
     }
 
-    public void listBooksCheckedOut() {
-
-        if (this.hasZeroBooks()) {
-            System.out.println(this.firstName + " has no books checked out.");
-            return;
-        }
-        this.booksCheckedOut.sort(new BookComparator());
-        System.out.println(this.getFirstName() + "'s checked out books:");
-        System.out.println();
-        for (int i = 0; i < this.booksCheckedOut.size(); i++) {
-                System.out.println(i + 1 + ": " + this.booksCheckedOut.get(i));
-        }
-    }
-
     public String getFirstName() {
         return this.firstName;
     }
@@ -40,24 +26,20 @@ public class Visitor {
         return this.booksCheckedOut;
     }
 
-    public boolean hasBookCheckedOut(Book book) {
-        return this.booksCheckedOut.contains(book);
-    }
-
-    public void checkOutBook(Book book) {
-        if (booksCheckedOut.size() < 3) {
-            booksCheckedOut.add(book);
+    public void checkOutBook(Book book) throws CheckOutBookLimitException {
+        if (this.booksCheckedOut.size() >= 3) {
+            throw new CheckOutBookLimitException(
+                this.firstName + " has already checked out the maximum number of books.");
         }
+            this.booksCheckedOut.add(book);
     }
 
-    public void returnBook(Book book) {
-        if (this.booksCheckedOut.contains(book)) {
+    public void returnBook(Book book) throws VisitorDoesNotPossessException {
+        if (!this.booksCheckedOut.contains(book)) {
+            throw new VisitorDoesNotPossessException(
+                this.firstName + " does not have this book!");
+        }
             booksCheckedOut.remove(book);
-        }
-    }
-
-    public boolean hasMaxBooks() {
-        return booksCheckedOut.size() == 3;
     }
 
     public boolean hasZeroBooks() {
