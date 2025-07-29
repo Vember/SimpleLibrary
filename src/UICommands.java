@@ -19,7 +19,7 @@ public class UICommands {
     public static void declareCurrentVisitor(Library library) {
 
         Scanner scan = new Scanner(System.in);
-        library.listVisitors();
+        listVisitors(library);
         System.out.println();
         System.out.print("Which visitor to declare?: #");
         int input = 0;
@@ -139,6 +139,12 @@ public class UICommands {
         System.out.println();
         for (int i = 0; i < visitor.getBooksCheckedOut().size(); i++) {
             System.out.println(i + 1 + ": " + visitor.getBooksCheckedOut().get(i));
+        }
+    }
+
+    public static void listVisitors(Library library) {
+        for (int i = 0; i < library.getVisitors().size(); i++) {
+            System.out.println((i + 1) + ": " + library.getVisitors().get(i).getLastName() + ", " + library.getVisitors().get(i).getFirstName());
         }
     }
 

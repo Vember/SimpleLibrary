@@ -39,12 +39,6 @@ public class Library {
         return this.currentVisitor;
     }
 
-    public void listVisitors() {
-        for (int i = 0; i < this.visitors.size(); i++) {
-            System.out.println((i + 1) + ": " + this.visitors.get(i).getLastName() + ", " + this.visitors.get(i).getFirstName());
-        }
-    }
-
     public void setCurrentVisitor(Visitor visitor) {
         this.currentVisitor = visitor;
     }
