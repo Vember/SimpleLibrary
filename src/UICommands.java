@@ -8,8 +8,14 @@ public class UICommands {
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter name (Last, First): ");
         String input = scan.nextLine();
-        String[] parts = input.split(", ");
-        Visitor visitor = new Visitor(parts[1], parts[0]);
+        Visitor visitor = new Visitor();
+        try {
+            String[] parts = input.split(", ");
+            visitor = new Visitor(parts[1], parts[0]);
+        } catch (Exception e) {
+            System.out.println("Invalid input.");
+            return null;
+        }
         System.out.println("Welcome to " + library.getName() + ", " + visitor.getFirstName() + "!");
         library.addVisitor(visitor);
         return visitor;
@@ -143,8 +149,10 @@ public class UICommands {
     }
 
     public static void listVisitors(Library library) {
-        for (int i = 0; i < library.getVisitors().size(); i++) {
-            System.out.println((i + 1) + ": " + library.getVisitors().get(i).getLastName() + ", " + library.getVisitors().get(i).getFirstName());
+        int i = 1;
+        for (Visitor visitor : library.getVisitors()) {
+            System.out.println(i + ": " + visitor);
+            i++;
         }
     }
 

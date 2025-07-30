@@ -14,6 +14,14 @@ public class Visitor {
 
     }
 
+    public Visitor() {
+
+        this.firstName = null;
+        this.lastName = null;
+        this.booksCheckedOut = new ArrayList<>();
+
+    }
+
     public String getFirstName() {
         return this.firstName;
     }
@@ -39,11 +47,16 @@ public class Visitor {
             throw new VisitorDoesNotPossessException(
                 this.firstName + " does not have this book!");
         }
-            booksCheckedOut.remove(book);
+            this.booksCheckedOut.remove(book);
     }
 
     public boolean hasZeroBooks() {
-        return booksCheckedOut.isEmpty();
+        return this.booksCheckedOut.isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        return this.lastName + ", " + this.firstName;
     }
 
 }

@@ -1,6 +1,5 @@
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.*;
 
 public class Main {
 
@@ -27,6 +26,7 @@ public class Main {
             for (int i = 1; i < menu.getHashMap().size() + 1; i++) {
                 if (input.equals(String.valueOf(i))) {
                     valid = true;
+                    break;
                 }
             }
             if (!valid) {
@@ -39,5 +39,4 @@ public class Main {
             }
         }
     }
-
 }

@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class Library {
 
-    private String name;
-    private ArrayList<Book> booksIn;
-    private ArrayList<Book> booksOut;
-    private ArrayList<Visitor> visitors;
-    public Visitor currentVisitor;
+    private final String name;
+    private final ArrayList<Book> booksIn;
+    private final ArrayList<Book> booksOut;
+    private final ArrayList<Visitor> visitors;
+    private Visitor currentVisitor;
 
     public Library(String name) throws FileNotFoundException {
 
@@ -23,7 +23,7 @@ public class Library {
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             String[] parts = line.split(">");
-            booksIn.add(new Book(parts[0], parts[1], parts[2], Integer.valueOf(parts[3])));
+            booksIn.add(new Book(parts[0], parts[1], parts[2], Integer.parseInt(parts[3])));
         }
     }
 

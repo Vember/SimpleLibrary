@@ -1,9 +1,9 @@
 public class Book {
 
-    private String title;
-    private String author;
-    private String reference;
-    private int pages;
+    private final String title;
+    private final String author;
+    private final String reference;
+    private final int pages;
 
     public Book(String title, String author, String reference, int pages) {
 
